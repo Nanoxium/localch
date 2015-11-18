@@ -1,0 +1,10 @@
+#content {
+    width: 1024px;
+    height: 768px;
+    margin: auto;
+}
+
+#mapDiv{
+    width : 60%;
+    height : 60%;
+}
