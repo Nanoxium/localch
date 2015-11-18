@@ -1,3 +1,4 @@
+//Variable de "classe"
 var map = null;
 var marker = null;
 var watchId = null;
@@ -19,9 +20,9 @@ function initMap()
 {
     var latLng = new google.maps.LatLng(0,0);
     var mapOptions = {
-        zoom : 8,
-        center : latLng,
-        mapTypeId : google.maps.MapTypeId.ROADMAP
+        zoom: 8,
+        center: latLng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     
     map = new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
@@ -35,7 +36,8 @@ function stopWatch() {
 
 function successCallback(position)
 {
-    marker = null;
+    if(marker != null)
+        marker.setMap(null);
     $("#lat").text(position.coords.latitude);
     $("#long").text(position.coords.longitude);
     $("#prec").text(position.coords.accuracy);
@@ -43,12 +45,17 @@ function successCallback(position)
     $("#precalt").text(position.coords.altitudeAccuracy);
     $("#angle").text(position.coords.heading);
     $("#speed").text(position.coords.speed);
-    $("#time").text(new DateTime(position.timestamp));
-    var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    $("#time").text(new Date(position.timestamp));
+
+    var pos = {lat: position.coords.latitude,
+        lng: position.coords.longitude};
+
     map.panTo(pos);
+
+    alert("Marker");
     marker = new google.maps.Marker({
-        position : pos,
-        map : map
+        position: pos,
+        map: map
     });
 }
 
