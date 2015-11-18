@@ -8,7 +8,7 @@ function startWatch() {
     $("#start").attr("disabled", "false");
     if (navigator.geolocation)
     {
-        watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, {enableHighAccuracy: true, timeout: 10000, maximumAge: 0});
+        watchId = navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {enableHighAccuracy: true, timeout: 10000, maximumAge: 0});
     }
     else
     {
@@ -52,7 +52,6 @@ function successCallback(position)
 
     map.panTo(pos);
 
-    alert("Marker");
     marker = new google.maps.Marker({
         position: pos,
         map: map
