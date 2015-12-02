@@ -1,11 +1,14 @@
 <?php
+/*******************
+* Auteurs : Jérôme Chételat / Philippe Ku
+* Ecole/Classe : CFPT Informatique
+* Date : 02.12.15
+* Programme : Local.ch
+* Fichier : DatabaseConnector.php
+* Version : 1.0
+*******************/
 
-/**
- * Created by IntelliJ IDEA.
- * User: nanox
- * Date: 18.11.15
- * Time: 15:55
- */
+
 class DatabaseConnector
 {
     public $host = null;

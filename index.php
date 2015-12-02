@@ -1,9 +1,17 @@
+<!------------------
+Auteurs : Jérôme Chételat / Philippe Ku
+Ecole/Classe : CFPT Informatique
+Date : 02.12.15
+Programme : Local.ch
+Fichier : index.php
+Version : 1.0
+------------------->
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Local.ch</title>
-        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/geolocalisation.css" />
         <script type="text/javascript" src="js/jquery-2.1.4.min.js" ></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript" src="js/script.js" ></script>
@@ -39,6 +47,7 @@
             <button id="start" onclick="startWatch()">Commencer la géolocalisation</button>
             <button id="stop" onclick="stopWatch()" disabled="">Arrêter la géolocalisation</button><br/>
             <div id="mapDiv">
+                <!--Div ou est affichée la carte-->
             </div>
         </div>
     </body>

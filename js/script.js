@@ -1,8 +1,21 @@
-//Variable de "classe"
+/*******************
+Auteurs : Jérôme Chételat / Philippe Ku
+Ecole/Classe : CFPT Informatique
+Date : 02.12.15
+Programme : Local.ch
+Fichier : script.js
+Version : 1.0
+*******************/
+
+//Variables de "classe".
 var map = null;
 var marker = null;
 var watchId = null;
 
+/**
+ * Fonction qui va démarrer la géolocalisation.
+ * @returns {undefined}
+ */
 function startWatch() {
     $("#stop").removeAttr('disabled');
     $("#start").attr("disabled", "false");
@@ -16,6 +29,20 @@ function startWatch() {
     }
 }
 
+/**
+ * Fonction qui va arrêter la géolocalisation.
+ * @returns {undefined}
+ */
+function stopWatch() {
+    $("#stop").attr("disabled", "true");
+    $("#start").removeAttr("disabled");
+    navigator.geolocation.clearWatch(watchId);
+}
+
+/**
+ * Fonction qui va initialiser la carte de l'API GoogleMaps.
+ * @returns {undefined}
+ */
 function initMap()
 {
     var latLng = new google.maps.LatLng(0,0);
@@ -28,12 +55,11 @@ function initMap()
     map = new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
 }
 
-function stopWatch() {
-    $("#stop").attr("disabled", "true");
-    $("#start").removeAttr("disabled");
-    navigator.geolocation.clearWatch(watchId);
-}
-
+/**
+ * Fonction qui va afficher si la géolocalisation à réussi les valeurs de la géolocalisation ainsi q'un marqueur de position sur la carte.
+ * @param {type} position
+ * @returns {undefined}
+ */
 function successCallback(position)
 {
     if(marker != null)
@@ -58,6 +84,11 @@ function successCallback(position)
     });
 }
 
+/**
+ * Fonction qui va afficher un message d'erreur, si les permissions sont refusées, si la position est indisponible ou si le temps à expiré.
+ * @param {type} error
+ * @returns {undefined}
+ */
 function errorCallback(error)
 {
     switch (error.code)
