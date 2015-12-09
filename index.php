@@ -6,6 +6,13 @@ Programme : Local.ch
 Fichier : index.php
 Version : 1.0
 ------------------->
+<?php
+session_start();
+
+if(isset($_SESSION['logout']))
+    session_destroy();
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,37 +25,7 @@ Version : 1.0
     </head>
     <body onload="initMap()">
         <div id="content">
-            <table>
-                <tr>
-                    <td>Latitude : </td><td id="lat"></td>
-                </tr>
-                <tr>
-                    <td>Longitude : </td><td id="long"></td>
-                </tr>
-                <tr>
-                    <td>Précision : </td><td id="prec"></td>
-                </tr>
-                <tr>
-                    <td>Altitude : </td><td id="alt"></td>
-                </tr>
-                <tr>
-                    <td>Précision altitude : </td><td id="precalt"></td>
-                </tr>
-                <tr>
-                    <td>Angle par rapport au nord : </td><td id="angle"></td>
-                </tr>
-                <tr>
-                    <td>Vitesse de déplacement : </td><td id="speed"></td>
-                </tr>
-                <tr>
-                    <td>Temps : </td><td id="time"></td>
-                </tr>
-            </table><br/>
-            <button id="start" onclick="startWatch()">Commencer la géolocalisation</button>
-            <button id="stop" onclick="stopWatch()" disabled="">Arrêter la géolocalisation</button><br/>
-            <div id="mapDiv">
-                <!--Div ou est affichée la carte-->
-            </div>
+
         </div>
     </body>
 </html>

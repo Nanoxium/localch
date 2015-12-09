@@ -1,7 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 #Fichier indésirable
-m152.iml
+*.iml
 
 #Dossier indésirable
 .idea
