@@ -2,6 +2,12 @@
 * Requête pour ajouter un utilisateur à la base de données.
 * Requête pour afficher tout les utilisateurs de la base de donnée sur la carte GoogleMap.
 
+** Fonctionalité
+* Gestion des utilisateurs
+* Afficher les utilisateurs sur la carte avec les marker et les infobulles
+* Ajouter une carte lors de la connection
+* Ajouter une carte lors de l'enregistrement d'un utilisateur
+
 ** API GOOGLEMAPS
 * Implémenter le GeoCoding. (https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple)
 * Implémenter le reverse Geocoding. (https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse)
