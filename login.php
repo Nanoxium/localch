@@ -3,16 +3,20 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Local.ch - Login</title>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/localchstyle.css"/>
-        <script src="./localch-script.js"></script>
-    </head>
-    <body>
+<head>
+    <title>Local.ch - Login</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/localchstyle.css"/>
+    <script src="./localch-script.js"></script>
+</head>
+
+<body>
+<div id="content">
+    <div class="center">
         <?php include 'header.php'; ?>
         <h1>Connexion</h1>
+
         <form action="login.php" method="POST">
             <table>
                 <tr>
@@ -28,6 +32,8 @@ session_start();
                 </tr>
             </table>
         </form>
-    </body>
+    </div>
+</div>
+</body>
 </html>
 

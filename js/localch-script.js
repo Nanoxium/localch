@@ -9,9 +9,8 @@
 
 //Variables de "classe".
 var map = null;
-var marker = null;
+var markers = [];
 var geocoder = null;
-var userLocation = null;
 var infowindow = null;
 
 
@@ -29,6 +28,39 @@ function initializeMap() {
     map = new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
     geocoder = new google.maps.Geocoder();
     infowindow = new google.maps.InfoWindow();
+}
+
+function addMarker(latlng, title)
+{
+    var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        title: title
+    });
+    marker.addListener('click', function(){
+        infowindow.setContent(marker.title);
+        infowindow.open(map, marker);
+    });
+    markers.push(marker);
+}
+
+function setMapOnAllMarker(map)
+{
+    for(var i = 0; i < markers.length; i++)
+    {
+        markers[i].setMap(map);
+    }
+}
+
+function clearMarkersMap()
+{
+    setMapOnAllMarker(null);
+}
+
+function deleteMarkers()
+{
+    clearMarkersMap();
+    markers = [];
 }
 
 /**
@@ -57,7 +89,6 @@ function geocodeLatLng(geocoder, map, infowindow) {
     });
 }
 
-
 /**
  * Fonction qui affiche sur la carte une postion à partir d'une adresse
  * @param address Adresse à géocoder
@@ -70,18 +101,13 @@ function geocodeAddress(address) {
         //Vérifie si ça a fonctionné
         if (status === google.maps.GeocoderStatus.OK) {
 
-            userLocation = results[0].geometry.location
+            //Défini
+            var userLocation = results[0].geometry.location;
 
             map.setCenter(userLocation);
-            marker = new google.maps.Marker({
-                map: map,
-                position: userLocation,
-                title: address
-            });
-            infowindow.setContent(address)
+            clearMarkersMap();
+            addMarker(userLocation, address);
             $('#location').val(userLocation.toString());
-        } else {
-
         }
     });
 }
