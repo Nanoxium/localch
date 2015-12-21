@@ -36,6 +36,10 @@ table tbody tr{
     height: 3%;
 }
 
+input{
+    width: 200%;
+}
+
 #mapDiv{
     margin: auto;
     width : 100%;

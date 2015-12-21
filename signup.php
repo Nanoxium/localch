@@ -5,7 +5,14 @@ if(isset($_REQUEST['register']))
 {
     if($_REQUEST['password'] == $_REQUEST['confirmpass'])
     {
-
+        foreach($_REQUEST as $key => $value)
+        {
+            $infos[$key] = filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        $u = new User();
+        $isRegistered = $u->InsertUserIntoDataBase($infos['firstname'], $infos['lastname'], $infos['username'], $infos['email'], $infos['password'], $infos['location'], $infos['address']);
+        if($isRegistered)
+            header("Location: index.php?registered");
     }
 }
 ?>
@@ -44,11 +51,11 @@ if(isset($_REQUEST['register']))
                 </tr>
                 <tr>
                     <td><p>Email : </p></td>
-                    <td><input type="email" name="username" required="" maxlength="20"/></td>
+                    <td><input type="email" name="email" required="" maxlength="20"/></td>
                 </tr>
                 <tr>
                     <td><p>Mot de passe : </p></td>
-                    <td><input type="password" name="pass" required="" maxlength="20"/></td>
+                    <td><input type="password" name="password" required="" maxlength="20"/></td>
                 </tr>
                 <tr>
                     <td><p>Confirmer le mot de passe : </p></td>
@@ -58,14 +65,14 @@ if(isset($_REQUEST['register']))
                     <td><p>Adresse : </p></td>
                     <td>
                         <p id="errors" class="error"></p>
-                        <input type="text" id="adress" name="adresse" required="" maxlength="50"/>
-                        <input type="button" name="search" onclick="geocodeAddress($('#adress').val());"
+                        <input type="text" id="address" name="address" required="" maxlength="50"/><br/>
+                        <input type="button" name="search" onclick="geocodeAddress($('#address').val());"
                                value="Recherche l'address"/>
                         <input type="hidden" id="location" name="location" value=""/>
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="submit" name="valider" value="Créer"/></td>
+                    <td><input type="submit" name="valider" value="S'inscrire"/></td>
                     <td>
                     </td>
                 </tr>

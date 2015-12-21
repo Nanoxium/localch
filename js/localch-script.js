@@ -18,7 +18,7 @@ var infowindow = null;
  * Fonction qui va initialiser la carte de l'API GoogleMaps et les objets pour la carte
  */
 function initializeMap() {
-    var latLng = new google.maps.LatLng(46.2050242,6.1090691);
+    var latLng = new google.maps.LatLng(46.2050242, 6.1090691);
     var mapOptions = {
         zoom: 8,
         center: latLng,
@@ -30,35 +30,30 @@ function initializeMap() {
     infowindow = new google.maps.InfoWindow();
 }
 
-function addMarker(latlng, title)
-{
+function addMarker(latlng, title) {
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
         title: title
     });
-    marker.addListener('click', function(){
+    marker.addListener('click', function () {
         infowindow.setContent(marker.title);
         infowindow.open(map, marker);
     });
     markers.push(marker);
 }
 
-function setMapOnAllMarker(map)
-{
-    for(var i = 0; i < markers.length; i++)
-    {
+function setMapOnAllMarker(map) {
+    for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
     }
 }
 
-function clearMarkersMap()
-{
+function clearMarkersMap() {
     setMapOnAllMarker(null);
 }
 
-function deleteMarkers()
-{
+function deleteMarkers() {
     clearMarkersMap();
     markers = [];
 }
@@ -69,17 +64,16 @@ function deleteMarkers()
  * @param map la carte sur laquelle afficher le point
  * @param infowindow l'infobulle
  */
-function geocodeLatLng(geocoder, map, infowindow) {
-    geocoder.geocode({'location': latlng}, function(results, status) {
+function geocodeLatLng(latlng, addMarkerToMap) {
+    var tmpaddress;
+    geocoder.geocode({'location': latlng}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
             if (results[1]) {
                 map.setZoom(11);
-                marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map
-                });
-                infowindow.setContent(results[1].formatted_address);
-                infowindow.open(map, marker);
+                if (addMarkerToMap) {
+                    addMarker(latlng, results[0].formatted_address);
+                }
+                $('#address').val(results[0].formatted_address);
             } else {
                 window.alert('No results found');
             }
@@ -87,6 +81,7 @@ function geocodeLatLng(geocoder, map, infowindow) {
             window.alert('Geocoder failed due to: ' + status);
         }
     });
+    return tmpaddress;
 }
 
 /**
@@ -97,16 +92,14 @@ function geocodeLatLng(geocoder, map, infowindow) {
  */
 function geocodeAddress(address) {
 
-    geocoder.geocode({'address': address}, function(results, status) {
+    geocoder.geocode({'address': address}, function (results, status) {
         //Vérifie si ça a fonctionné
         if (status === google.maps.GeocoderStatus.OK) {
-
             //Défini
             var userLocation = results[0].geometry.location;
-
             map.setCenter(userLocation);
             clearMarkersMap();
-            addMarker(userLocation, address);
+            var newAddress = geocodeLatLng(userLocation, true);
             $('#location').val(userLocation.toString());
         }
     });
