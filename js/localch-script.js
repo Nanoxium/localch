@@ -73,7 +73,6 @@ function geocodeAddress(address) {
             userLocation = results[0].geometry.location
 
             map.setCenter(userLocation);
-            map
             marker = new google.maps.Marker({
                 map: map,
                 position: userLocation,
