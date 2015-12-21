@@ -11,7 +11,7 @@
 class DatabaseConnector
 {
     private static $host = "localhost";
-    private static $dbname = "m152";
+    public static $dbname = "m152";
     private static $username = "m151admin";
 
     private static $password = "m151admin";
