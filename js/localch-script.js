@@ -30,32 +30,57 @@ function initializeMap() {
     infowindow = new google.maps.InfoWindow();
 }
 
-function addMarker(latlng, title) {
+/**
+ * Ajoute un marker
+ * @param latlng
+ * @param title
+ */
+function addMarker(latlng, title, content) {
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
         title: title
     });
     marker.addListener('click', function () {
-        infowindow.setContent(marker.title);
+        infowindow.setContent(content);
         infowindow.open(map, marker);
     });
     markers.push(marker);
 }
 
+/**
+ * Afficher sur la carte les marker dans la liste des markers
+ * @param map
+ */
 function setMapOnAllMarker(map) {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
     }
 }
 
+/**
+ * Enlève les marker sur la carte
+ */
 function clearMarkersMap() {
     setMapOnAllMarker(null);
 }
 
+/**
+ * Supprime tout les marker
+ */
 function deleteMarkers() {
     clearMarkersMap();
     markers = [];
+}
+
+function displayAllUsers()
+{
+    $.post("getUsers.php", function (users){
+        for(var i = 0; i < users.length; i++)
+        {
+            addMarker(users[i].latlng, users[i].nom + " " + users[i].prenom, users[i].address);
+        }
+    })
 }
 
 /**
@@ -81,7 +106,6 @@ function geocodeLatLng(latlng, addMarkerToMap) {
             window.alert('Geocoder failed due to: ' + status);
         }
     });
-    return tmpaddress;
 }
 
 /**

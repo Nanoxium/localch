@@ -1,5 +1,17 @@
 <?php
 session_start();
+require_once './user.php';
+
+if(isset($_REQUEST['connexion']))
+{
+    $u = new User();
+    echo $u->CheckLogin($_REQUEST['username'], $_REQUEST['password']);
+    if($u->CheckLogin($_REQUEST['username'], $_REQUEST['password']))
+    {
+        $u->selectUser($_REQUEST['username']);
+        $_SESSION['username'] = $u->username;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,14 +29,14 @@ session_start();
         <?php include 'header.php'; ?>
         <h1>Connexion</h1>
 
-        <form action="login.php" method="POST">
+        <form action="#" method="POST">
             <table>
                 <tr>
-                    <td><p>Login : </p></td>
-                    <td><input type="text" name="login" required="" maxlength="20"/></td>
+                    <td><p>Nom d'utilisateur : </p></td>
+                    <td><input type="text" name="username" required="" maxlength="20"/></td>
                 </tr>
                 <tr>
-                    <td><p>Password : </p></td>
+                    <td><p>Mot de passe : </p></td>
                     <td><input type="password" name="password" required="" maxlength="20"/></td>
                 </tr>
                 <tr>

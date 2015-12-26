@@ -1,7 +1,8 @@
 <?php
 session_start();
+require_once 'user.php';
 
-if(isset($_REQUEST['register']))
+if(isset($_REQUEST['valider']))
 {
     if($_REQUEST['password'] == $_REQUEST['confirmpass'])
     {
@@ -9,6 +10,7 @@ if(isset($_REQUEST['register']))
         {
             $infos[$key] = filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
         }
+        var_dump($infos);
         $u = new User();
         $isRegistered = $u->InsertUserIntoDataBase($infos['firstname'], $infos['lastname'], $infos['username'], $infos['email'], $infos['password'], $infos['location'], $infos['address']);
         if($isRegistered)
@@ -16,6 +18,7 @@ if(isset($_REQUEST['register']))
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 

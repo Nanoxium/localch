@@ -8,6 +8,8 @@
  * Fichier : Position.php
  * Version : 1.0
  *******************/
+
+
 class Position
 {
     public $id = null;
@@ -22,7 +24,7 @@ class Position
     {
 
         $this->dbc = new DatabaseConnector("localhost", "geolocation", "m151admin", "m151admin");
-        $this->prp_insertPosition = $this->dbc->prepare("insert into " . $this->dbc->getDbName() . ".position (latlng, adress) values (:latlng, :address)");
+        $this->prp_insertPosition = $this->dbc->prepare("insert into " . $this->dbc->getDbName() . ".positions (latlng, address) values (:latlng, :address)");
         $this->prp_selectPosition = $this->dbc->prepare("select latlng from positions where id = :id");
         $this->prp_selectPositionId = $this->dbc->prepare("select id from positions where latlng = :latlng");
     }
@@ -33,6 +35,7 @@ class Position
         try {
             $this->prp_insertPosition->bindParam(':latlng', $latlng);
             $this->prp_insertPosition->bindParam(':address', $address);
+            echo $latlng .", " . $address;
             $isok = $this->prp_insertPosition->execute();
         } catch (PDOException $e) {
             echo $e->getCode() . " \n";
