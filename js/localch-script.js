@@ -34,7 +34,7 @@ function initializeMap(id) {
  * @param latlng
  * @param title
  */
-function addMarker(latlng, title, content) {
+function addMarker(latlng, title) {
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
@@ -80,7 +80,7 @@ function displayAllUsers()
         {
             //Parse the floating numbers
             var latlng = users[i].latlng.match(/[-+]?([0-9]*\.[0-9]+|[0-9]+)/g);
-            addMarker(new google.maps.LatLng(latlng[0], latlng[1]), users[i].lastname + " " + users[i].firstname, users.address);
+            addMarker(new google.maps.LatLng(latlng[0], latlng[1]), users[i].lastname + " " + users[i].firstname + " : " + users[i].address);
         }
     });
     setMapOnAllMarker(map);
@@ -99,7 +99,7 @@ function geocodeLatLng(latlng, addMarkerToMap) {
             if (results[1]) {
                 map.setZoom(11);
                 if (addMarkerToMap) {
-                    addMarker(latlng, results[0].formatted_address, results[0].formatted_address);
+                    addMarker(latlng, results[0].formatted_address);
                 }
                 $('#address').val(results[0].formatted_address);
                 $('#send').removeAttr("disabled");
