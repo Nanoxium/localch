@@ -74,7 +74,7 @@ function deleteMarkers() {
 
 function displayAllUsers()
 {
-    $.post("getUsers.php", function (result){
+    $.post("get-users.php", function (result){
         var users = JSON.parse(result);
         for(var i = 0; i < users.length; i++)
         {

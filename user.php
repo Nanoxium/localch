@@ -34,7 +34,7 @@ class User
     public function __construct()
     {
 
-        $this->dbc = new DatabaseConnector("localhost", "geolocation", "m151admin", "m151admin");
+        $this->dbc = new DatabaseConnector();
 
         //crée les prepare statement
         $this->prp_selectAllUsers = $this->dbc->prepare("select firstname, lastname, address, latlng from " . $this->dbc->getDbName() . ".userinfo");

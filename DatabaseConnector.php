@@ -23,7 +23,7 @@ class DatabaseConnector
      * @param $username the user to connect with
      * @param $password the password of the user
      */
-    public function __construct($host, $dbname, $username, $password)
+    public function __construct($host = "localhost", $dbname = "geolocation", $username = "m151admin", $password = "m151admin")
     {
         $this->host = $host;
         $this->dbname = $dbname;

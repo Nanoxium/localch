@@ -1,4 +1,12 @@
 <?php
+/********************
+ * Auteurs : Jérôme Chételat / Philippe Ku
+ * Ecole/Classe : CFPT Informatique
+ * Date : 02.12.15
+ * Programme : Local.ch
+ * Fichier : login.php
+ * Version : 1.0
+ *******************/
 session_start();
 require_once './user.php';
 
@@ -10,7 +18,7 @@ if(isset($_REQUEST['connexion']))
     {
         $u->selectUser($_REQUEST['username']);
         $_SESSION['username'] = $u->username;
-        header("Location: index.php?registered");
+        header("Location: index.php");
     }
     else
     {

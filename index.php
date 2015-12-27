@@ -1,4 +1,12 @@
 <?php
+/********************
+ * Auteurs : Jérôme Chételat / Philippe Ku
+ * Ecole/Classe : CFPT Informatique
+ * Date : 02.12.15
+ * Programme : Local.ch
+ * Fichier : index.php
+ * Version : 1.0
+ *******************/
 session_start();
 
 if(isset($_REQUEST['logout']))
@@ -31,6 +39,7 @@ if(isset($_REQUEST['logout']))
             <?php
         }else { ?>
             <h1>Bonjour <?= $_SESSION['username'] ?></h1>
+            <h2>Position des utilisateurs du site</h2>
             <div id="mapIndex">
 
             </div>

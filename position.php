@@ -23,7 +23,7 @@ class Position
     public function __construct()
     {
 
-        $this->dbc = new DatabaseConnector("localhost", "geolocation", "m151admin", "m151admin");
+        $this->dbc = new DatabaseConnector();
         $this->prp_insertPosition = $this->dbc->prepare("insert into " . $this->dbc->getDbName() . ".positions (latlng, address) values (:latlng, :address)");
 
         //Prepare statement

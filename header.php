@@ -1,3 +1,13 @@
+<?php
+/********************
+* Auteurs : Jérôme Chételat / Philippe Ku
+* Ecole/Classe : CFPT Informatique
+* Date : 02.12.15
+* Programme : Local.ch
+* Fichier : header.php
+* Version : 1.0
+*******************/
+?>
 <header>
     <h1>Projet M152 - Local.ch</h1>
     <!-- menu -->

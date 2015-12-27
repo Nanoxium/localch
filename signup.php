@@ -1,4 +1,12 @@
 <?php
+/********************
+ * Auteurs : Jérôme Chételat / Philippe Ku
+ * Ecole/Classe : CFPT Informatique
+ * Date : 02.12.15
+ * Programme : Local.ch
+ * Fichier : signup.php
+ * Version : 1.0
+ *******************/
 session_start();
 require_once 'user.php';
 
