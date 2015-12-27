@@ -25,7 +25,7 @@ if(isset($_REQUEST['valider']))
         $u = new User();
         $isRegistered = $u->InsertUserIntoDataBase($infos['firstname'], $infos['lastname'], $infos['username'], $infos['email'], $infos['password'], $infos['location'], $infos['address']);
         if($isRegistered)
-            header("Location: index.php?registered$");
+            header("Location: index.php?registered");
         else
             $e_passwd = true;
     }
