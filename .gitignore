@@ -1,3 +1,4 @@
+/phpinfo.php
 # Created by .ignore support plugin (hsz.mobi)
 
 #Fichier indésirable
@@ -5,4 +6,5 @@
 
 #Dossier indésirable
 .idea
+/Group.php
 nbproject

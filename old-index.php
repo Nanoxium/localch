@@ -11,7 +11,7 @@ Version : 1.0
     <head>
         <meta charset="UTF-8">
         <title>Local.ch</title>
-        <link rel="stylesheet" href="./css/geolocalisation.css" />
+        <link rel="stylesheet" href="css/localchstyle.css" />
         <script type="text/javascript" src="js/jquery-2.1.4.min.js" ></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript" src="js/localch-script.js" ></script>

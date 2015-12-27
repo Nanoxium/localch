@@ -1,0 +1,73 @@
+/*******************
+* Auteurs : Jérôme Chételat / Philippe Ku
+* Ecole/Classe : CFPT Informatique
+* Date : 02.12.15
+* Programme : Local.ch
+* Fichier : geolocalisation.css
+* Version : 1.0
+*******************/
+body {
+    background-color: #2a82bc;
+}
+
+h1 {
+    text-align: center;
+}
+
+nav{
+    width: 100%;
+}
+
+nav ul{
+    text-align: center;
+}
+
+nav li {
+    list-style: none;
+    display: inline-block;
+}
+
+table {
+    margin: auto;
+}
+
+table tbody tr{
+    margin: 0;
+    height: 3%;
+}
+
+article{
+    text-align: center;
+    margin: auto;
+}
+
+input{
+    width: 200%;
+}
+
+#mapDiv{
+    margin: auto;
+    width : 100%;
+    height : 200px;
+}
+
+#mapIndex{
+    margin: auto;
+    width : 100%;
+    height : 500px;
+}
+
+#content {
+    width: 1024px;
+    height: 768px;
+    margin: auto;
+    background-color: #3498db;
+}
+
+.error{
+    color: whitesmoke;
+}
+
+.center {
+    margin: 20%;
+}
