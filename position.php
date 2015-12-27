@@ -25,17 +25,23 @@ class Position
 
         $this->dbc = new DatabaseConnector("localhost", "geolocation", "m151admin", "m151admin");
         $this->prp_insertPosition = $this->dbc->prepare("insert into " . $this->dbc->getDbName() . ".positions (latlng, address) values (:latlng, :address)");
+
+        //Prepare statement
         $this->prp_selectPosition = $this->dbc->prepare("select latlng from positions where id = :id");
-        $this->prp_selectPositionId = $this->dbc->prepare("select id from positions where latlng = :latlng");
+        $this->prp_selectPositionId = $this->dbc->prepare("select id from positions where address = :address");
     }
 
+    /**
+     * Insère une position
+     * @param $latlng objet latitude longitude sous le format : (lat, long)
+     * @param $address l'adress liée à la position
+     * @return bool insertion bien éffectuée
+     */
     public function InsertPosition($latlng, $address)
     {
-        $isok = false;
         try {
             $this->prp_insertPosition->bindParam(':latlng', $latlng);
             $this->prp_insertPosition->bindParam(':address', $address);
-            echo $latlng .", " . $address;
             $isok = $this->prp_insertPosition->execute();
         } catch (PDOException $e) {
             echo $e->getCode() . " \n";
@@ -45,29 +51,38 @@ class Position
         return $isok;
     }
 
-    public function GetPosition($id)
+    /**
+     * Retourne la position selon un identifiant
+     * @param $id identifiant de la position
+     * @param int $format PDO::FETCH_
+     * @return mixed|null la position ou rien
+     */
+    public function GetPosition($id, $format = PDO::FETCH_OBJ)
     {
-        $isok = false;
         try {
             $this->prp_selectPosition->bindParam(':id', $id);
             $isok = $this->prp_selectPosition->execute();
         } catch (PDOException $e) {
             $isok = false;
         }
-        return ($isok) ? $this->prp_selectPosition->fetch(PDO::FETCH_OBJ) : null;
+        return ($isok) ? $this->prp_selectPosition->fetch($format) : null;
     }
 
-    public function GetPositionId($latlng)
+    /**
+     * Retourne la position selon une adresse
+     * @param $address l'adresse
+     * @return mixed|null
+     */
+    public function GetPositionId($address)
     {
-        $isok = false;
         try{
-            $this->prp_selectPositionId->bindParam(':latlng', $latlng);
+            $this->prp_selectPositionId->bindParam(':address', $address);
             $isok = $this->prp_selectPositionId->execute();
         }
         catch(PDOException $e)
         {
             $isok = false;
         }
-        return $this->prp_selectPositionId->fetch(PDO::FETCH_OBJ);
+        return ($isok) ? $this->prp_selectPositionId->fetch(PDO::FETCH_OBJ) : null;
     }
 }

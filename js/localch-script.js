@@ -13,11 +13,10 @@ var markers = [];
 var geocoder = null;
 var infowindow = null;
 
-
 /**
  * Fonction qui va initialiser la carte de l'API GoogleMaps et les objets pour la carte
  */
-function initializeMap() {
+function initializeMap(id) {
     var latLng = new google.maps.LatLng(46.2050242, 6.1090691);
     var mapOptions = {
         zoom: 8,
@@ -25,7 +24,7 @@ function initializeMap() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    map = new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
+    map = new google.maps.Map(document.getElementById(id), mapOptions);
     geocoder = new google.maps.Geocoder();
     infowindow = new google.maps.InfoWindow();
 }
@@ -42,7 +41,7 @@ function addMarker(latlng, title, content) {
         title: title
     });
     marker.addListener('click', function () {
-        infowindow.setContent(content);
+        infowindow.setContent(marker.title);
         infowindow.open(map, marker);
     });
     markers.push(marker);
@@ -75,12 +74,16 @@ function deleteMarkers() {
 
 function displayAllUsers()
 {
-    $.post("getUsers.php", function (users){
+    $.post("getUsers.php", function (result){
+        var users = JSON.parse(result);
         for(var i = 0; i < users.length; i++)
         {
-            addMarker(users[i].latlng, users[i].nom + " " + users[i].prenom, users[i].address);
+            //Parse the floating numbers
+            var latlng = users[i].latlng.match(/[-+]?([0-9]*\.[0-9]+|[0-9]+)/g);
+            addMarker(new google.maps.LatLng(latlng[0], latlng[1]), users[i].lastname + " " + users[i].firstname, users.address);
         }
-    })
+    });
+    setMapOnAllMarker(map);
 }
 
 /**
@@ -96,9 +99,10 @@ function geocodeLatLng(latlng, addMarkerToMap) {
             if (results[1]) {
                 map.setZoom(11);
                 if (addMarkerToMap) {
-                    addMarker(latlng, results[0].formatted_address);
+                    addMarker(latlng, results[0].formatted_address, results[0].formatted_address);
                 }
                 $('#address').val(results[0].formatted_address);
+                $('#send').removeAttr("disabled");
             } else {
                 window.alert('No results found');
             }
@@ -117,9 +121,9 @@ function geocodeLatLng(latlng, addMarkerToMap) {
 function geocodeAddress(address) {
 
     geocoder.geocode({'address': address}, function (results, status) {
-        //Vérifie si ça a fonctionné
+        //Vérifie si ça le geocogind a fonctionné
         if (status === google.maps.GeocoderStatus.OK) {
-            //Défini
+            //récupère la position en latitude et longitude
             var userLocation = results[0].geometry.location;
             map.setCenter(userLocation);
             clearMarkersMap();

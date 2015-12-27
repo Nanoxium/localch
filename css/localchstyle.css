@@ -36,6 +36,11 @@ table tbody tr{
     height: 3%;
 }
 
+article{
+    text-align: center;
+    margin: auto;
+}
+
 input{
     width: 200%;
 }
@@ -46,6 +51,12 @@ input{
     height : 200px;
 }
 
+#mapIndex{
+    margin: auto;
+    width : 100%;
+    height : 500px;
+}
+
 #content {
     width: 1024px;
     height: 768px;
@@ -54,7 +65,7 @@ input{
 }
 
 .error{
-    color: red;
+    color: whitesmoke;
 }
 
 .center {

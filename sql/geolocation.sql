@@ -43,8 +43,10 @@ CREATE TABLE `positions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `latlng` varchar(200) NOT NULL,
   `address` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `latlng_UNIQUE` (`latlng`),
+  UNIQUE KEY `address_UNIQUE` (`address`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,11 +86,13 @@ CREATE TABLE `users` (
   `id_group` int(11) NOT NULL DEFAULT '2',
   `id_pos` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_id_group_idx` (`id_group`),
   KEY `fk_id_pos_idx` (`id_pos`),
   CONSTRAINT `fk_id_group` FOREIGN KEY (`id_group`) REFERENCES `groups` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `fk_id_pos` FOREIGN KEY (`id_pos`) REFERENCES `positions` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,4 +122,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-21 15:29:51
+-- Dump completed on 2015-12-27  3:26:08

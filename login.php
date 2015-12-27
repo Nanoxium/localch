@@ -2,14 +2,19 @@
 session_start();
 require_once './user.php';
 
+$e_login = false;
 if(isset($_REQUEST['connexion']))
 {
     $u = new User();
-    echo $u->CheckLogin($_REQUEST['username'], $_REQUEST['password']);
     if($u->CheckLogin($_REQUEST['username'], $_REQUEST['password']))
     {
         $u->selectUser($_REQUEST['username']);
         $_SESSION['username'] = $u->username;
+        header("Location: index.php?registered");
+    }
+    else
+    {
+        $e_login = true;
     }
 }
 ?>
@@ -28,7 +33,7 @@ if(isset($_REQUEST['connexion']))
     <div class="center">
         <?php include 'header.php'; ?>
         <h1>Connexion</h1>
-
+        <?= ($e_login) ? '<article class="error">Le mot de passe ou le nom d\'utilisateur est érroné !</article>' : '' ?>
         <form action="#" method="POST">
             <table>
                 <tr>

@@ -1,11 +1,2 @@
-** REQUETES
-* Requête pour ajouter un utilisateur à la base de données.
-* Requête pour afficher tout les utilisateurs de la base de donnée sur la carte GoogleMap.
-
 ** Fonctionalité
 * Gestion des utilisateurs
-* Ajouter une carte lors de la connection
-* Ajouter une carte lors de l'enregistrement d'un utilisateur
-
-** OPTIONEL
-* Recherche fulltext pour chercher un utilisateur et l'afficher dans la carte GoogleMaps.
